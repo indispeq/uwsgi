@@ -1,0 +1,16 @@
+[uwsgi]
+; this configuration assumes that the vassal name is the same as the project/virtualenv name
+
+vassal_name = %n
+
+uid = www-data
+gid = www-data
+
+socket = /tmp/%n.sock
+
+home = <%= @app_venv %>
+
+processes = 10
+
+chdir = <%= @app_path %>
+

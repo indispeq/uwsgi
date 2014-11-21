@@ -1,0 +1,41 @@
+upstream webapp {
+	server unix:///tmp/<%= @app_url %>.sock;
+}
+
+server {
+	listen 80;
+
+	server_tokens off:
+	server_name <%= @app_url %>;
+
+        return 301 http://www.<%= @app_url %>$request_uri;
+
+}
+
+server {
+	listen 80;
+
+	client_max_body_size 25M;
+
+	server_tokens off:
+	app_url <%= @app_url %>;
+
+        server_name www.<%= @app_url %>;
+
+	location / {
+		uwsgi_pass webapp;
+		include uwsgi_params;
+	}
+
+#	location /media {
+#
+#	}
+#
+#	location /static {
+#
+#	}
+
+}
+
+
+

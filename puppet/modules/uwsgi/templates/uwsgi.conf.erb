@@ -1,0 +1,13 @@
+# Emperor uWSGI script
+
+description "uWSGI Emperor"
+start on runlevel [2345]
+stop on runlevel [06]
+
+exec <%= @uwsgi_dir %>/bin/uwsgi \
+	--master \
+	--die-on-term \
+	--emperor <%= @uwsgi_dir %>/apps-enabled \
+	--emperor-tyrant \
+	--vassals-include <%= @uwsgi_dir %>/etc/vassals-default.ini \
+	--socket /tmp/uwsgi_emperor.sock

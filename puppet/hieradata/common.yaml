@@ -1,0 +1,9 @@
+---
+classes:
+  - python
+  - uwsgi
+python::version: "system"
+python::pip: true
+python::dev: true
+python::virtualenv: true
+uwsgi::uwsgi_dir: "/opt/uwsgi"

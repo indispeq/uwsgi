@@ -1,0 +1,3 @@
+class uwsgi::params {
+
+} 
