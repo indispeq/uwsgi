@@ -26,18 +26,19 @@ server {
 
 	charset	utf-8;
 
+	location /media {
+		alias <%= @app_venv %>/<%= @app_module %>/media;
+	}
+
+	location /static {
+		alias <%= @app_venv %>/<%= @app_module %>/static;
+	}
+
 	location / {
 		uwsgi_pass <%= @app_module %>;
 		include uwsgi_params;
 	}
 
-#	location /media {
-#
-#	}
-#
-#	location /static {
-#
-#	}
 
 }
 
