@@ -39,10 +39,7 @@ class uwsgi (
   $uwsgi_dir      = $uwsgi::params::uwsgi_dir,
   $app_url        = $uwsgi::params::app_url,
 ) inherits uwsgi::params {
-  anchor { 'uwsgi::begin': } ->
   class { '::uwsgi::install': } ->
   class { '::uwsgi::config': } ->
-  class { '::uwsgi::service': } ->
-  anchor { 'uwsgi::end': }
-
+  class { '::uwsgi::service': }
 }

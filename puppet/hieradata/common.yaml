@@ -2,8 +2,14 @@
 classes:
   - python
   - uwsgi
+  - fuweb
 python::version: "system"
 python::pip: true
 python::dev: true
 python::virtualenv: true
 uwsgi::uwsgi_dir: "/opt/uwsgi"
+fuweb::app_url: "testdomain.com"
+fuweb::app_venv: "/opt/testdomain"
+fuweb::app_path: "/opt/testdomain/testapp"
+fuweb::app_module: "fuweb"
+fuweb::wsgi_file: "test.py"

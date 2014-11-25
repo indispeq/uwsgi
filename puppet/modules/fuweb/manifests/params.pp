@@ -1,0 +1,3 @@
+class fuweb::params {
+
+}

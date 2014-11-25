@@ -1,13 +1,13 @@
 class uwsgi::install inherits uwsgi {
 
-  $uwsgi_internal_directories = [ "$uwsgi_dir/etc","$uwsgi_dir/apps-available","$uwsgi_dir/apps-enabled"]
+  $uwsgi_internal_directories = [ "$uwsgi_dir/etc","$uwsgi_dir/apps-available","$uwsgi_dir/apps-enabled", "$uwsgi_dir/log"]
 
   user { 'uwsgi':
     ensure     => present,
     groups     => 'staff',
     managehome => true,
     system     => true,
-  }
+  }->
 
   python::virtualenv { $uwsgi_dir :
     ensure  => present,
@@ -38,17 +38,26 @@ class uwsgi::install inherits uwsgi {
 
   package { 'nginx':
     ensure => installed,
-  }->
+  }
 
+  service { 'nginx':
+    ensure  => running,
+    enable  => true,
+    require => Package['nginx'],
+  }
+  
   file { '/etc/nginx/sites-enabled/default':
     ensure => absent,
-  }->
+    notify => Service['nginx'],
+    require => Package['nginx'],
+  }
 
   file { '/etc/nginx/uwsgi_params':
     ensure => present,
     group  => root,
     owner  => root,
     source => 'puppet:///modules/uwsgi/uwsgi_params',
+    require => Package['nginx'],
   }
 
 }

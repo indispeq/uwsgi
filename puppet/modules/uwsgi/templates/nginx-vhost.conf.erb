@@ -5,7 +5,7 @@ upstream webapp {
 server {
 	listen 80;
 
-	server_tokens off:
+	server_tokens off;
 	server_name <%= @app_url %>;
 
         return 301 http://www.<%= @app_url %>$request_uri;
@@ -15,12 +15,16 @@ server {
 server {
 	listen 80;
 
+	access_log /var/log/nginx/<%= @app_url %>-access.log;
+	error_log /var/log/nginx/<%= @app_url %>-error.log;
+
 	client_max_body_size 25M;
 
-	server_tokens off:
-	app_url <%= @app_url %>;
+	server_tokens off;
 
         server_name www.<%= @app_url %>;
+
+	charset	utf-8;
 
 	location / {
 		uwsgi_pass webapp;

@@ -10,7 +10,8 @@ socket = /tmp/%n.sock
 
 home = <%= @app_venv %>
 
-processes = 10
+processes = 8
 
 chdir = <%= @app_path %>
 
+wsgi-file = <%= wsgi_file %>

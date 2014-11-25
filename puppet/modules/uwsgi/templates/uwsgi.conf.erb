@@ -8,6 +8,6 @@ exec <%= @uwsgi_dir %>/bin/uwsgi \
 	--master \
 	--die-on-term \
 	--emperor <%= @uwsgi_dir %>/apps-enabled \
-	--emperor-tyrant \
+	--emperor-nofollow \
 	--vassals-include <%= @uwsgi_dir %>/etc/vassals-default.ini \
 	--socket /tmp/uwsgi_emperor.sock
