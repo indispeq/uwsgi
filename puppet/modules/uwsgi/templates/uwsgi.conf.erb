@@ -10,4 +10,5 @@ exec <%= @uwsgi_dir %>/bin/uwsgi \
 	--emperor <%= @uwsgi_dir %>/apps-enabled \
 	--emperor-nofollow \
 	--vassals-include <%= @uwsgi_dir %>/etc/vassals-default.ini \
-	--socket /tmp/uwsgi_emperor.sock
+	--socket /tmp/uwsgi_emperor.sock \
+	--logto <%= @uwsgi_dir %>/log/uwsgi.log
