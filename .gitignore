@@ -1,0 +1,7 @@
+puppet/modules/apt
+puppet/modules/concat
+puppet/modules/ntp
+puppet/modules/postgresql
+puppet/modules/python
+puppet/modules/stdlib
+puppet/.tmp
