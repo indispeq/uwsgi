@@ -6,4 +6,9 @@ class djangotest::install inherits djangotest {
     app_module => $app_module,
   }
 
+#  postgresql::server::db { $django_db_name :
+#    user     => $django_db_user,
+#    password => postgresql_password($django_db_user, $django_db_password),
+#  }
+
 }

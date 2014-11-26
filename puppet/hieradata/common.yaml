@@ -4,6 +4,7 @@ classes:
   - uwsgi
   - fuweb
   - djangotest
+  - postgresql::server
 python::version: "system"
 python::pip: true
 python::dev: true
@@ -16,3 +17,4 @@ fuweb::wsgi_file: "test.py"
 djangotest::app_url: "djangotest.com"
 djangotest::app_venv: "/opt/djangotest"
 djangotest::app_module: "djangotest"
+postgresql::server::db: "%{hiera('djangotest::app_module')}"

@@ -4,3 +4,4 @@ puppet/modules/ntp
 puppet/modules/postgresql
 puppet/modules/python
 puppet/modules/stdlib
+puppet/.tmp

@@ -26,13 +26,14 @@ define uwsgi::djangoapp (
 
   exec { 'new-django-project':
     cwd     => $app_venv,
-    command => "${app_venv}/bin/django-admin.py startproject ${app_module}",
+    command => "/bin/bash -c 'cd ${app_venv} && . bin/activate && ${app_venv}/bin/django-admin.py startproject ${app_module}'",
     creates => $app_path,
+    require => Python::Pip['Django'],
   }
 
   file { "${uwsgi_dir}/apps-available/${app_url}.ini":
     ensure  => present,
-    content => template('uwsgi/uwsgi-vassal.ini.erb'),
+    content => template('uwsgi/uwsgi-django-vassal.ini.erb'),
   }->
 
   file { "${uwsgi_dir}/apps-enabled/${app_url}.ini":
@@ -44,13 +45,15 @@ define uwsgi::djangoapp (
     ensure => directory,
     owner  => 'www-data',
     group  => 'www-data',
-  }->
+    require => Exec['new-django-project'],
+  }
 
   file { "${app_venv}/${app_module}/static":
     ensure => directory,
     owner  => 'www-data',
     group  => 'www-data',
-  }->
+    require => Exec['new-django-project'],
+  }
 
   file { "/etc/nginx/sites-available/${app_url}.conf":
     ensure  => present,
