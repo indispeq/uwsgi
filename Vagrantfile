@@ -120,8 +120,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   #
   #   chef.validation_client_name = "ORGNAME-validator"
   config.vm.provision "shell", inline: "apt-get update && apt-get install -y ruby-dev git"
-  config.vm.provision "shell", inline: "gem install librarian-puppet"
-  config.vm.provision "shell", inline: "cd /vagrant/puppet && librarian-puppet install"
+  #config.vm.provision "shell", path: "scripts/puppet_modules.sh"
 
   config.vm.provision "puppet" do |puppet|
     puppet.module_path = "puppet/modules"

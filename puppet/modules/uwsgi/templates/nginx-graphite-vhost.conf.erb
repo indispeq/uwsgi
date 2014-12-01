@@ -1,0 +1,32 @@
+upstream <%= @app_module %> {
+	server unix:///tmp/<%= @app_url %>.sock;
+}
+
+server {
+	listen 80;
+
+	access_log /var/log/nginx/<%= @app_url %>-access.log;
+	error_log /var/log/nginx/<%= @app_url %>-error.log;
+
+	client_max_body_size 25M;
+
+	server_tokens off;
+
+        server_name <%= @app_url %> www.<%= @app_url %>;
+
+	charset	utf-8;
+
+	location /content {
+		alias /usr/share/graphite-web/static; 
+	}
+
+	location / {
+		uwsgi_pass <%= @app_module %>;
+		include uwsgi_params;
+	}
+
+
+}
+
+
+

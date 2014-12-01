@@ -5,6 +5,9 @@ classes:
   - fuweb
   - djangotest
   - postgresql::server
+  - graphitetest
+  - graphite
+  - statsd
 python::version: "system"
 python::pip: true
 python::dev: true
@@ -18,3 +21,13 @@ djangotest::app_url: "djangotest.com"
 djangotest::app_venv: "/opt/djangotest"
 djangotest::app_module: "djangotest"
 postgresql::server::db: "%{hiera('djangotest::app_module')}"
+graphite::db_name: "%{hiera('postgresql::server::db')}"
+graphite::db_host: "localhost"
+graphite::db_user: "graphite"
+graphite::db_password: "changeme"
+graphite::secret_key: "asdfasdfasdfjkl;jkl;jkl;"
+graphitetest::app_url: "graphitetest.com"
+graphitetest::app_module: "graphite"
+graphitetest::app_path: "/usr/share/graphite-web"
+graphitetest::app_venv: "/opt/graphite"
+
