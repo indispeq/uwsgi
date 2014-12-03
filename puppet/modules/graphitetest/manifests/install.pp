@@ -5,6 +5,7 @@ class graphitetest::install inherits graphitetest {
     app_path   => $app_path,
     app_module => $app_module,
     app_venv   => $app_venv,
+    require    => Postgresql::Server::Db[$db_name],
   }
 
   postgresql::server::db { $db_name :

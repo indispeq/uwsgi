@@ -15,4 +15,11 @@ class graphite::install inherits graphite {
     require => Package['graphite-web'],
   }
 
+  exec { 'graphite-manage-syncdb-perms':
+    command     => '/usr/bin/graphite-manage syncdb --noinput && /bin/chown -R _graphite:www-data /var/lib/graphite && /bin/chmod -R 770 /var/lib/graphite',
+    require     => [ Package['graphite-web'], File['/etc/graphite/local_settings.py'], Postgresql::Server::Db[$db_name] ],
+    notify      => Exec['refresh-app'],
+  }
+
+
 }

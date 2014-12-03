@@ -3,15 +3,15 @@
 
 vassal_name = %n
 
-uid = www-data
-gid = www-data
+uid = www-data 
+gid = www-data 
 
 socket = /tmp/%n.sock
 
-home = <%= @app_venv %>
 chdir = <%= @app_path %>
 master = true
 processes = 4
+pythonpath = /usr/lib/python2.7/dist-packages 
 wsgi-file = /usr/share/graphite-web/graphite.wsgi
 pidfile = /tmp/%n.pid
 harakiri = 20
@@ -20,4 +20,4 @@ vacuum = true
 daemonize = <%= @uwsgi_dir %>/log/%n.log
 pymodule-alias = graphite.local_settings=/etc/graphite/local_settings.py
 buffer-size = 65536
-
+socket-mode = 660

@@ -1,5 +1,6 @@
 class graphite (
   $secret_key  = $graphite::params::secret_key,
+  $log_dir     = $graphite::params::log_dir,
   $db_name     = $graphite::params::db_name,
   $db_user     = $graphite::params::db_user,
   $db_password = $graphite::params::db_password,
